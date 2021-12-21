@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.dao.ImgdetailsDAO">
+    <resultMap type="com.it.entity.Imgdetails" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="photoid" property="photoid" jdbcType="INTEGER"/>
+      <result column="filename" property="filename" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.it.entity.Imgdetails">
+        insert into Imgdetails values(null,#{photoid},#{filename})
+    </insert>
+    
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+      select * from Imgdetails where 1=1
+       <if test="photoid!=null and photoid!=''">
+           AND photoid=#{photoid}
+       </if>
+      order by id desc
+    </select>
+    
+
+    <delete id="delete" parameterType="Int">
+      delete from Imgdetails where id=#{id}
+    </delete>
+    
+
+    
+
+</mapper>
+

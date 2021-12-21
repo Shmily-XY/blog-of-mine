@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.dao.ImgadvDAO">
+    <resultMap type="com.it.entity.Imgadv" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="filename" property="filename" jdbcType="VARCHAR"/>
+      <result column="url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+      select * from Imgadv where 1=1
+      order by id desc
+    </select>
+    
+    <insert id="add" parameterType="com.it.entity.Imgadv">
+      insert into Imgadv values(null,#{filename},#{url})
+    </insert>
+    
+    <delete id="delete" parameterType="Int">
+      delete from Imgadv where id=#{id}
+    </delete>
+
+
+    <select id="findById" parameterType="Int" resultType="com.it.entity.Imgadv">
+        select * from Imgadv where id=#{id}
+    </select>
+
+    <update id="update" parameterType="com.it.entity.Imgadv">
+        update Imgadv set url=#{url},filename=#{filename} where id=#{id}
+    </update>
+
+
+
+</mapper>
+
