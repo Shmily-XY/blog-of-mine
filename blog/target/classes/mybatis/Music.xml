@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it.dao.MusicDAO">
+    <resultMap type="com.it.entity.Music" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="title" property="title" jdbcType="VARCHAR"/>
+      <result column="filename" property="filename" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+      select * from Music where 1=1
+       <if test="key!=null and key!=''">
+           AND title LIKE "%"#{key}"%"
+       </if>
+      order by id desc
+    </select>
+<!--    select * from Music where 1=1;-->
+
+
+    <select id="selectRandom" parameterType="HashMap" resultMap="BaseResultMap">
+        select * from Music where 1=1
+        order by RAND() LIMIT 1
+    </select>
+    
+    <insert id="add" parameterType="com.it.entity.Music">
+      insert into Music values(null,#{title},#{filename})
+    </insert>
+    
+    <delete id="delete" parameterType="Int">
+      delete from Music where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="Int" resultType="com.it.entity.Music">
+      select * from Music where id=#{id}
+    </select>
+    
+    <update id="update" parameterType="com.it.entity.Music">
+      update Music set title=#{title},filename=#{filename} where id=#{id}
+    </update>
+    
+
+    
+
+</mapper>
+
